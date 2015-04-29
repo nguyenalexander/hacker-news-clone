@@ -1,0 +1,10 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-12">
+      <h1> <%=@post.title%> - <%=@post.link%>
+      <small><span class="glyphicon glyphicon-pencil"><%=link_to 'Edit', edit_post_path%></span>
+      <span class="glyphicon glyphicon-remove"><%=link_to 'Delete', post_path, method: :delete, data: { confirm: 'Are you sure?'} %></span>
+      </small></h1>
+    </div>
+  </div>
+</div>

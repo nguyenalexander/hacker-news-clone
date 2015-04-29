@@ -1,7 +1,7 @@
 <h1>Your Posts</h1>
 <ul>
 <% @posts.each do |p| %>
-  <li><a href=<%= p.link %>><%= p.title %> </a></li>
+  <li><a href=<%= p.link %>><%= p.title %> - <%= link_to 'view', p %></a></li>
 
   <% end %>
 </ul>
