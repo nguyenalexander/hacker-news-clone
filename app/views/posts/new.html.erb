@@ -1,0 +1,6 @@
+<h1> Make a new post! </h1>
+<%= bootstrap_form_for @post do |f| %>
+  <%= f.text_field :title, placeholder: 'enter your title'%>
+  <%= f.text_field :link, placeholder: 'enter your link'%>
+  <%= f.primary "Post" %>
+<% end %>

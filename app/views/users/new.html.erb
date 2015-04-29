@@ -1,0 +1,8 @@
+<h1> Sign up </h1>
+<%= bootstrap_form_for @user do |f| %>
+  <%= f.text_field :email, placeholder: 'enter your email', icon: 'user' %>
+  <%= f.text_field :name, placeholder: 'enter your username', icon: 'user' %>
+  <%= f.password_field :password, placeholder: 'enter your password', icon: 'lock' %>
+  <%= f.password_field :password_confirmation, placeholder: 'reenter your password', icon: 'lock' %>
+  <%= f.primary "Sign up" %>
+<% end %>
