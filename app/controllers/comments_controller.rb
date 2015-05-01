@@ -2,11 +2,11 @@ class CommentsController < ApplicationController
 
   def index
     @post = Post.find(params[:post_id])
-    @comment = Comment.all
     @comments = @post.comments
     @vote = Vote.new
     @votes = Vote.all
   end
+
 
   def create
     if params.key?(:post_id)

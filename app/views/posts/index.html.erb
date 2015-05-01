@@ -9,22 +9,20 @@
       <div class="form-group upvote">
         <%= bootstrap_form_for [p, @vote] do |f| %>
         <%= f.hidden_field :value, value:'1' %>
-        <%= f.submit :vote, class:'btn btn-default'%>
-          <span class="glyphicon glyphicon-arrow-up"></span>
+        <%= f.button '', class: 'btn btn-link glyphicon glyphicon-arrow-up' %>
         <% end %>
       </div>
       <div class="form-group downvote">
         <%= bootstrap_form_for [p, @vote] do |f| %>
         <%= f.hidden_field :value, value:'-1' %>
-        <%= f.submit :vote, class:'btn btn-default'%>
-          <span class="glyphicon glyphicon-arrow-down"></span>
+        <%= f.button '', class: 'btn btn-link glyphicon glyphicon-arrow-up' %>
         <% end %>
       </div>
       </td>
       <td>
         <%= link_to p.title, p.link %><small class="link"> (<%= p.link %>)</small>
         <br/>
-        <p class="subtext user">by <%= p.user.email %> : <%= link_to 'view comments', post_comments_path(p) %></p>
+        <p class="subtext user">by <%= p.user.email %> : <%= link_to 'view comments', post_comments_path(p)%> (<%= p.comments.length%>)</p>
       </td>
       <td>
       <%= p.votes.reduce(0) {|p, v| p+v.value} %>

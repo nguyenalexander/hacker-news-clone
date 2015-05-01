@@ -1,51 +1,67 @@
-<div class="container">
-  <div class="row">
-    <div class="col-md-12">
-      <h1> <%=@post.title%> - <%=link_to @post.link, @post.link%>
-    </div>
+<div class="row">
+  <div class="col-md-12">
+    <h1> <%=@post.title%> - <%=link_to @post.link, @post.link%>
   </div>
-<table id="main" cellpadding="0" cellspacing="0">
-  <tbody>
-      <% count = 0 %>
-      <% @comments.each do |c| %>
-      <% count += 1 %>
-      <tr>
-      <td class="title"><span class="rank"> <%= count %>. </span>
-      <div class="form-group upvote">
-        <%= bootstrap_form_for [@post.comments.find(c.id), (@vote)] do |f| %>
-        <%= f.hidden_field :value, value:'1' %>
-        <%= f.submit :vote, class:'btn btn-default'%>
-          <span class="glyphicon glyphicon-arrow-up"></span>
-        <% end %>
-      </div>
-      <div class="form-group downvote">
-        <%= bootstrap_form_for [c, @vote] do |f| %>
-        <%= f.hidden_field :value, value:'-1' %>
-        <%= f.submit :vote, class:'btn btn-default'%>
-          <span class="glyphicon glyphicon-arrow-down"></span>
-        <% end %>
-      </div>
-      </td>
-      <td>
-        <div class="row">
-          <div class="col-md-12">
-            <h2>Add a comment:</h2>
-            <%= bootstrap_form_for([@post, @post.comments.build]) do |f| %>
-            <div class="field">
-              <%= f.label :body %><br />
-              <%= f.text_area :body %>
+</div>
+<div class="row">
+  <div class="col-md-12">
+    <table id="main" cellpadding="0" cellspacing="0">
+      <thead>
+        <th> </th>
+        <th> </th>
+        <th> </th>
+        <th> </th>
+      </thead>
+      <tbody>
+        <% count = 0 %>
+        <% @comments.each do |c| %>
+        <% count += 1 %>
+        <tr>
+          <td class="rank"><span class="rank"> <%= count %>.</span></td>
+          <td class="votes">
+            <div class="row">
+              <div class="col-md-12">
+                <div class="form-group upvote">
+                  <%= bootstrap_form_for [@post, c, @vote] do |f| %>
+                  <%= f.hidden_field :value, value:'1' %>
+                  <%= f.button '', class: 'btn btn-link glyphicon glyphicon-arrow-up' %>
+                  <% end %>
+                </div>
+              </div>
+              <div class="col-md-12">
+                <div class="vote">
+                <p><%= c.votes.reduce(0) {|c, p| c+p.value} %></p>
+                </div>
+              </div>
+              <div class="col-md-12">
+                <div class="form-group downvote">
+                  <%= bootstrap_form_for [@post, c, @vote] do |f| %>
+                  <%= f.hidden_field :value, value:'-1' %>
+                  <%= f.button '', class: 'btn btn-link glyphicon glyphicon-arrow-down' %>
+                  <% end %>
+                </div>
+              </div>
             </div>
-            <div class="actions">
-              <%= f.submit %>
-            </div>
-            <% end %>
-          </div>
-        </div>
-      </td>
-      </tr>
-      <% end %>
-
-    </tr>
-  </tbody>
-</table>
+          </td>
+          <td>
+            <p><%= c.user.email %></p>
+          </td>
+          <td>
+            <p><%= c.body %></p>
+          </td>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+  <div class="col-md-12">
+    <h2>Add a comment:</h2>
+    <%= bootstrap_form_for([@post, @post.comments.build]) do |f| %>
+    <div class="field">
+      <%= f.text_area :body %>
+    </div>
+    <div class="actions">
+      <%= f.submit %>
+    </div>
+    <% end %>
+  </div>
 </div>
