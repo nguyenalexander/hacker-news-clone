@@ -5,6 +5,8 @@ class PostsController < ApplicationController
 
   def index
     @posts = Post.all
+    @vote = Vote.new
+    @votes = Vote.all
   end
 
   def new
@@ -50,4 +52,10 @@ class PostsController < ApplicationController
   def post_params
     params.require(:post).permit(:title, :link)
   end
+
+  # pushes vote created on a post into the user's ratings (user created vote)
+  # u.cast_votes << Post.last.votes.create(value:-1)
+  # pushes vote created on a user into the user's casted votes
+  # u.cast_votes << User.last.votes.create(value:2)
+
 end

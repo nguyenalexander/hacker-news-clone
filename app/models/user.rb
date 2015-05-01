@@ -4,6 +4,14 @@ class User < ActiveRecord::Base
 
   has_many :posts
 
+  has_many :votes, as: :votable
+
+  has_many :cast_votes, class_name: 'Vote'
+
+  has_many :comments, as: :commentable
+
+  has_many :created_comments, class_name: 'Comment'
+
   validates :email,
     presence: true,
     uniqueness: {case_sensitive: false},

@@ -6,14 +6,14 @@ class UsersController < ApplicationController
 
   #set the session
   def create
-    User.create :email => params[:user][:email], :password => params[:user][:password], :name => params[:user][:name]
+    @user = User.create :email => params[:user][:email], :password => params[:user][:password], :name => params[:user][:name]
 
-    if @user
+    if @user.save
       flash[:success] = 'Signup Successful!'
       redirect_to root_path
     else
       flash[:danger] = 'Signup failed!'
-      redirect_to signup_path
+      redirect_to new_user_path
     end
   end
 

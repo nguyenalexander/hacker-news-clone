@@ -1,7 +1,17 @@
 <h1>Your Posts</h1>
-<ul>
-<% @posts.each do |p| %>
-  <li><a href=<%= p.link %>><%= p.title %> - <%= link_to 'view', p %></a></li>
+<table id="main" cellpadding="0" cellspacing="0">
+  <tbody>
+      <% count = 0 %>
+      <% @posts.each do |p| %>
+      <% count += 1 %>
+      <tr>
+      <td class="title"><span class="rank"> <%= count %>. </span><%= link_to p.title, p.link %><small class="link"> (<%= p.link %>) | <%= link_to 'view', p %></small></td>
+      </tr>
+      <tr>
+      <td class="subtext user">by <%= p.user.email %></td>
+      </tr>
+      <% end %>
 
-  <% end %>
-</ul>
+    </tr>
+  </tbody>
+</table>

@@ -1,7 +1,37 @@
-<h1>Posts</h1>
-<ul>
-<% @posts.each do |p| %>
-  <li><a href=<%= p.link %>><%= p.title %></a></li>
+<h1>yclone-inator</h1>
+<table id="main" cellpadding="0" cellspacing="0">
+  <tbody>
+      <% count = 0 %>
+      <% @posts.each do |p| %>
+      <% count += 1 %>
+      <tr>
+      <td class="title"><span class="rank"> <%= count %>. </span>
+      <div class="form-group upvote">
+        <%= bootstrap_form_for [p, @vote] do |f| %>
+        <%= f.hidden_field :value, value:'1' %>
+        <%= f.submit :vote, class:'btn btn-default'%>
+          <span class="glyphicon glyphicon-arrow-up"></span>
+        <% end %>
+      </div>
+      <div class="form-group downvote">
+        <%= bootstrap_form_for [p, @vote] do |f| %>
+        <%= f.hidden_field :value, value:'-1' %>
+        <%= f.submit :vote, class:'btn btn-default'%>
+          <span class="glyphicon glyphicon-arrow-down"></span>
+        <% end %>
+      </div>
+      </td>
+      <td>
+        <%= link_to p.title, p.link %><small class="link"> (<%= p.link %>)</small>
+        <br/>
+        <p class="subtext user">by <%= p.user.email %> : <%= link_to 'view comments', post_comments_path(p) %></p>
+      </td>
+      <td>
+      <%= p.votes.reduce(0) {|p, v| p+v.value} %>
+      </td>
+      </tr>
+      <% end %>
 
-  <% end %>
-</ul>
+    </tr>
+  </tbody>
+</table>
