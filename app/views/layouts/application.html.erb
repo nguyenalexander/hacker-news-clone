@@ -30,7 +30,7 @@
       <li class="active"><a href="/users/new">Sign Up</a></li>
       <li><a href="/login">Login</a></li>
     <% else %>
-      <li><a><%= "hello #{@current_user.email}" if @current_user %></a></li>
+      <li><a><%= "hello #{@current_user.name}  -" if @current_user %></a></li>
       <li><a href="/logout">Logout</a></li>
       <li><a href="/posts">all posts</a></li>
       <li><a href="/users">your posts</a></li>
